@@ -27,3 +27,23 @@ grpcurl -plaintext -d '{"keyword" : "メン" }' localhost:8083 proto.ProductQuer
 grpcurl -cacert presen/prepare/queryservice.pem queryservice:8083 list 
 grpcurl -cacert ./queryservice.pem -d '{"keyword" : "ペン" }' queryservice:8083 proto.ProductQuery.ByKeyword
 ```
+
+```zsh
+apk update
+
+apk add curl
+
+wget -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
+
+chmod +x mkcert
+
+mv mkcert /usr/local/bin/
+
+mkcert -install
+
+cd queries/presen/prepare/
+
+mkcert queryservice
+
+grpcurl -cacert presen/prepare/queryservice.pem queryservice:8083 list
+```
