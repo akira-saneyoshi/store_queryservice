@@ -11,22 +11,27 @@ services:
     # command: sh -c "go mod tidy"
     ports:
       - 8083:8083
-  queryservice_db_container:
-    build:
-      context: .
-      dockerfile: ./docker/database/Dockerfile
-    env_file: ./docker/database/db_env_file
-    container_name: queryservice_db_container
-    volumes:
-      - store_qry_mysql-data:/var/lib/mysql
-      - ./docker/database/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/database/DDL:/docker-entrypoint-initdb.d
-      - ./docker/database/DDL:/etc/ddl
-      - ./docker/database/logs:/var/log/mysql
-    ports:
-      - 3306:3306
-    links:
-      - queryservice
-volumes:
-  store_qry_mysql-data:
-    name: store_qry_mysql-data
+    networks:
+      - external
+networks:
+  external:
+    name: storedb_net
+#  queryservice_db_container:
+#    build:
+#      context: .
+#      dockerfile: ./docker/database/Dockerfile
+#    env_file: ./docker/database/db_env_file
+#    container_name: queryservice_db_container
+#    volumes:
+#      - store_qry_mysql-data:/var/lib/mysql
+#      - ./docker/database/my.cnf:/etc/mysql/conf.d/my.cnf
+#      - ./docker/database/DDL:/docker-entrypoint-initdb.d
+#      - ./docker/database/DDL:/etc/ddl
+#      - ./docker/database/logs:/var/log/mysql
+#    ports:
+#      - 3306:3306
+#    links:
+#      - queryservice
+# volumes:
+#  store_qry_mysql-data:
+#    name: store_qry_mysql-data

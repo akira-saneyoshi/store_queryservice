@@ -1,6 +1,6 @@
 [mysql]                         # 使用するRDBMS
     dbname     = "sample_db"    # データベース名
-    host       = "queryservice_db_container"   # ホスト名
+    host       = "commandservice_db_container"   # ホスト名
     port       = 3306           # ポート番号
     user       = "root"         # ユーザー名
     pass       = "p@ssw0rd"     # パスワード
